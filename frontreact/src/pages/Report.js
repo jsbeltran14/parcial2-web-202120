@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import * as d3 from "d3";
 
+export const Report = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(()=>{
+    fetch('http://localhost:3001/api/products').then(res=>res.json())
+    .then(res=>{
+      setProducts(res);
+    })
+  })
 // set the dimensions and margins of the graph
 const margin = {top: 30, right: 30, bottom: 70, left: 60},
     width = 460 - margin.left - margin.right,
@@ -31,7 +40,7 @@ svg.append("g")
 
 // Add Y axis
 const y = d3.scaleLinear()
-  .domain([0, 1000])
+  .domain([0, 500])
   .range([ height, 0]);
 svg.append("g")
   .call(d3.axisLeft(y));
@@ -48,15 +57,13 @@ svg.selectAll("mybar")
 
 })
 
-export const Report = () => {
-  const [products, setProducts] = useState([]);
 
   return (
     <section id='report'>
       <div className='report-container'>
         <h1>Unidades en inventario</h1>
         <div id="my_dataviz"></div>
-        
+
       </div>
     </section>
   );
