@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path='/'
+            path='/home'
             element={<Home searchKey={searchState.searchKey} />}
           />
           <Route exact path='/report' element={<Report />} />
